@@ -1,175 +1,493 @@
-# index1.html
-
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Python Test Part 1</title>
+<title>Тестирование Python — 30 вопросов</title>
+
 <style>
-body{font-family:Arial;background:#f3f5fa;padding:20px;margin:0}
-.container{max-width:1100px;margin:auto}
-.question{background:#fff;padding:20px;border-radius:12px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.answer{display:block;padding:10px;border-radius:8px;margin-bottom:8px;cursor:pointer}
-.answer:hover{background:#eef3ff}
-.correct{background:#d4edda!important;border:2px solid #28a745}
-.wrong{background:#f8d7da!important;border:2px solid #dc3545}
-button{padding:15px 30px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:18px;cursor:pointer;display:block;margin:30px auto}
-#result{text-align:center;font-size:28px;font-weight:bold;margin-top:30px}
-#timer{position:sticky;top:10px;background:#fff;padding:15px;border-radius:10px;font-size:24px;font-weight:bold;text-align:center;margin-bottom:20px}
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.5;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    #timer {
+        position: sticky;
+        top: 0;
+        background: #222;
+        color: white;
+        padding: 12px;
+        font-size: 22px;
+        text-align: center;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        z-index: 1000;
+    }
+
+    .question {
+        margin-bottom: 30px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+    .question h3 {
+        margin-top: 0;
+    }
+
+    label {
+        display: block;
+        padding: 8px;
+        margin: 5px 0;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .correct {
+        background: #c8f7c5;
+        border: 1px solid #2ecc71;
+    }
+
+    .wrong {
+        background: #f9c0c0;
+        border: 1px solid #e74c3c;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+        border: none;
+        background: #007bff;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #0056b3;
+    }
+
+    #result {
+        margin-top: 30px;
+        font-size: 24px;
+        text-align: center;
+        font-weight: bold;
+    }
 </style>
 </head>
 <body>
+
 <div class="container">
-<h1>Тестирование Python — Часть 1</h1>
-<div id="timer">Осталось времени: 30:00</div>
-<form id="quiz"></form>
-<button type="button" onclick="checkAnswers()">Завершить тест</button>
+
+<h1>Тестирование Python — 30 вопросов</h1>
+
+<div id="timer">60:00</div>
+
+<form id="quizForm"></form>
+
+<button onclick="submitQuiz()">Завершить тест</button>
+
 <div id="result"></div>
+
 </div>
+
 <script>
+
 const questions = [
 {
-q:`1. Скрипт мониторинга должен опрашивать датчик температуры каждые 5 минут в течение часа.`,
-a:["for t in range(0, 60, 1)","for t in range(1, 12, 1)","for t in range(60, 5, 0)","for t in range(0, 61, 5)"],c:3},
+q: "1. Скрипт мониторинга должен опрашивать датчик температуры каждые 5 минут в течение часа. Техническое условие: использовать цикл for. Конфликт решений: оптимизация читаемости кода через встроенные функции. Настройка параметров цикла:",
+a: [
+"for t in range(0, 60, 1):",
+"for t in range(1, 12, 1):",
+"for t in range(60, 5, 0):",
+"for t in range(0, 61, 5):"
+],
+correct: 3
+},
 {
-q:`2. Разработчик выбирает между [x**2 for x in range(1000)] и (x**2 for x in range(1000)).`,
-a:["Tuple","Const list","Callback","Generator"],c:3},
+q: "2. Разработчик выбирает между [x**2 for x in range(1000)] и (x**2 for x in range(1000)) для разового суммирования квадратов. Техническое условие: минимизировать потребление памяти при выполнении операции. Результат использования круглых скобок в данном выражении:",
+a: [
+"Создание неизменяемого кортежа (tuple)",
+"Создание защищённого списка констант",
+"Создание функции обратного вызова",
+"Создание объекта-генератора (generator)"
+],
+correct: 3
+},
 {
-q:`3. Система складского учёта имеет множество необходимых товаров и товаров в наличии.`,
-a:["required | available","required & available","required - available","required ^ available"],c:2},
+q: "3. Система складского учёта имеет множество 'необходимых товаров' и множество 'товаров в наличии'. Техническое условие: сформировать перечень позиций, которые НУЖНО закупить (присутствуют в необходимых, но отсутствуют в наличии). Корректный оператор для вычисления недостающих элементов:",
+a: [
+"required | available",
+"required & available",
+"required - available",
+"required ^ available"
+],
+correct: 2
+},
 {
-q:`4. После from math import * программа начала выдавать неверные результаты.`,
-a:["Активация","Приоритет","Переполнение","Конфликт имен"],c:3},
+q: "4. После добавления в код инструкции from math import * программа начала выдавать неверные результаты в локальной функции sin(), которая ранее работала корректно. Техническое условие: в программе уже была определена собственная функция с именем sin. Первопричина возникновения логической ошибки в данном сценарии:",
+a: [
+"Модуль math требует ПРЯМОЙ активации",
+"Функции из math имеют ВЫСШИЙ приоритет",
+"Произошло переполнение стека вызовов",
+"Произошёл конфликт имён при импорте"
+],
+correct: 3
+},
 {
-q:`5. Очистка списка данных перед новым циклом импорта.`,
-a:["data=0","remove_all","del data","data.clear()"],c:3},
+q: "5. Проводится ревью кода очистки списка данных перед новым циклом импорта: while len(data) > 0: data.pop(). Контекст: требуется оптимизировать производительность и читаемость кода для Junior-разработчиков. Техническое условие: использовать встроенную атомарную операцию Python для полной очистки. Рекомендация по рефакторингу в соответствии со стандартами:",
+a: [
+"Переназначить переменную data = 0",
+"Вызвать метод data.remove_all()",
+"Использовать инструкцию del data",
+"Использовать метод data.clear()"
+],
+correct: 3
+},
 {
-q:`6. Режим открытия файла для добавления данных.`,
-a:["w","a","r","rb"],c:1},
+q: "6. Режим открытия файла, который используется для добавления новой текстовой информации в конец существующего документа без удаления старых данных.",
+a: [
+"Режим 'w' для создания нового текстового файла",
+"Режим 'a' для дозаписи данных в конец файла",
+"Режим 'r' для безопасного чтения всего файла",
+"Режим 'rb' для работы с бинарными объектами"
+],
+correct: 1
+},
 {
-q:`7. Тип коллекции для **kwargs.`,
-a:["Dictionary","FrozenSet","List","Tuple"],c:0},
+q: "7. Тип коллекции, в которую Python упаковывает все именованные аргументы (пары ключ-значение) при использовании **kwargs.",
+a: [
+"Dictionary",
+"FrozenSet",
+"List",
+"Tuple"
+],
+correct: 0
+},
 {
-q:`8. Правильный range() для четных индексов.`,
-a:["range(0,N,2)","range(N,0,2)","range(0,2,N)","range(2,N,0)"],c:0},
+q: "8. Корректные параметры функции range() для генерации последовательности индексов чётных элементов списка с шагом два, начиная с нуля.",
+a: [
+"range(0, N, 2)",
+"range(N, 0, 2)",
+"range(0, 2, N)",
+"range(2, N, 0)"
+],
+correct: 0
+},
 {
-q:`9. FIFO извлечение первого элемента.`,
-a:["orders.pop(0)","orders.remove(0)","orders.clear()","del orders[-1]"],c:0},
+q: "9. Сервис обработки заявок реализует принцип FIFO на базе списка. Техническое условие: извлечь самый старый элемент из начала очереди для обработки.",
+a: [
+"orders.pop(0)",
+"orders.remove(0)",
+"orders.clear()",
+"del orders[-1]"
+],
+correct: 0
+},
 {
-q:`10. Импорт только sqrt из math.`,
-a:["import math.sqrt","import sqrt from math","using math.sqrt","from math import sqrt"],c:3},
+q: "10. При разработке финансового приложения необходимо использовать функцию sqrt из стандартного модуля math без обязательного указания префикса math.",
+a: [
+"import math.sqrt",
+"import sqrt from math",
+"using math.sqrt as sqrt",
+"from math import sqrt"
+],
+correct: 3
+},
 {
-q:`11. Нормализация email.`,
-a:["email.strip().lower()","clear","replace","split"],c:0},
+q: "11. В модуле регистрации необходимо нормализовать Email-адрес пользователя перед сохранением в базу данных. Техническое условие: удалить все лишние пробелы по краям строки и привести символы к нижнему регистру. Ресурсное ограничение: выполнить операцию за один проход без создания промежуточных переменных. Оптимальная комбинация строковых методов:",
+a: [
+"email.strip().lower()",
+"email.clear().lower()",
+"email.replace(' ', '')",
+"email.lower().split()"
+],
+correct: 0
+},
 {
-q:`12. Метод получения позиции курсора файла.`,
-a:["seek","read","tell","write"],c:2},
+q: "12. Метод управления файловым дескриптором, позволяющий программисту получить целочисленное значение текущей позиции курсора внутри открытого файла.",
+a: [
+"Метод seek() перемещает курсор на позицию 0",
+"Метод read() загружает файл в список строк",
+"Метод tell() возвращает текущую позицию курсора",
+"Метод write() сохраняет данные в буфер обмена"
+],
+correct: 2
+},
 {
-q:`13. bonus_points внутри функции add_bonus.`,
-a:["Глобальная","Локальная","Константа","Ресурс"],c:1},
+q: "13. В системе управления лояльностью Kaspi объявлена переменная bonus_points = 500 внутри функции add_bonus. Техническое условие: переменная используется только для временного расчёта текущей транзакции. Ресурсное ограничение: ПРЯМОЕ обращение к этой переменной из основного кода программы ЗАПРЕЩЕНО. Статус данной переменной в архитектуре приложения:",
+a: [
+"Глобальная переменная, видимая всем функциям",
+"Локальная переменная, удаляемая после вызова",
+"Постоянная константа в оперативной памяти",
+"Ссылка на внешний защищённый ресурс системы"
+],
+correct: 1
+},
 {
-q:`14. Почему генератор не работает повторно.`,
-a:["Одна итерация","Сброс","Защита","ОС"],c:0},
+q: "14. После выполнения первого полного цикла for по объекту-генератору G, повторный вызов того же цикла по G НЕ приводит к выводу данных. Техническое условие: генератор был успешно инициализирован ранее. Свойство генераторов, объясняющее данное поведение:",
+a: [
+"Возможность только ОДНОЙ итерации",
+"Автоматический сброс всех данных",
+"Защита от записи в глобальный код",
+"Переход в режим ожидания команд ОС"
+],
+correct: 0
+},
 {
-q:`15. Рекурсивный шаг факториала.`,
-a:["+","*","factorial(n)","/"],c:1},
+q: "15. Необходимо реализовать вычисление факториала числа n через рекурсию. Техническое условие: каждый шаг рекурсии должен уменьшать задачу, стремясь к n=1. Ресурсное ограничение: использование минимального объема кода. Корректная логика рекурсивного шага:",
+a: [
+"return n + factorial(n-1)",
+"return n * factorial(n-1)",
+"return factorial(n) * (n+1)",
+"return n / factorial(n-1)"
+],
+correct: 1
+},
 {
-q:`16. Индекс последнего символа строки.`,
-a:["0","1","-1","-N"],c:2},
+q: "16. Индекс последнего символа в строке S произвольной длины при использовании механизма обратной индексации.",
+a: [
+"0",
+"1",
+"-1",
+"-N"
+],
+correct: 2
+},
 {
-q:`17. Почему score=100 пропускается.`,
-a:["Тип","elif","Нет =","Порядок"],c:2},
+q: "17. Программа начисления бонусов НЕ срабатывает для клиентов с ровно 100 баллами из-за ошибки в операторах сравнения. Техническое условие: if score > 100: ... elif score > 50: .... Причина пропуска граничного значения:",
+a: [
+"Ошибка типов данных в переменной",
+"Использование elif вместо else",
+"Отсутствие знака равно в условии",
+"Неверный порядок проверки условий"
+],
+correct: 2
+},
 {
-q:`18. Причина UnboundLocalError.`,
-a:["Тип","Локальная x","Закрыты","Удалена"],c:1},
+q: "18. Программа расчета скидки выдает ошибку UnboundLocalError при попытке выполнить x = x + 1 внутри функции, где x - глобальное число. Техническое условие: функция должна использовать значение существующей глобальной переменной. Первопричина возникновения ошибки в данном контексте:",
+a: [
+"Тип данных переменной x не поддерживает сложение",
+"Python считает x локальной из-за попытки присваивания",
+"Глобальные переменные СТРОГО закрыты для чтения",
+"Переменная x была удалена сборщиком мусора"
+],
+correct: 1
+},
 {
-q:`19. Генерация ValueError вручную.`,
-a:["break","pass","return","raise"],c:3},
+q: "19. В модуле регистрации требуется принудительно остановить выполнение и сигнализировать об ошибке, если введенный пароль короче 8 символов. Техническое условие: вызвать исключение ValueError вручную. Ресурсное ограничение: логика проверки должна быть встроена в условие if. Конфликт решений: использование стандартных исключений vs создание собственных веток логики. Инструкция Python для немедленной генерации данного исключения:",
+a: [
+"Использование оператора break для выхода из try",
+"Использование оператора pass для пропуска проверки",
+"Применение инструкции return для возврата False",
+"Применение инструкции raise для создания ошибки"
+],
+correct: 3
+},
 {
-q:`20. Получение 404 из строки.`,
-a:["[6:10]","[6:9]","[7:9]","[6:8]"],c:1},
+q: "20. Система парсинга логов должна извлекать код ошибки из строки формата 'Error:404:NotFound'. Техническое условие: код всегда находится между шестым и девятым индексами. Ресурсное ограничение: использование только базовых срезов. Верный синтаксис получения подстроки:",
+a: [
+"log_string[6:10]",
+"log_string[6:9]",
+"log_string[7:9]",
+"log_string[6:8]"
+],
+correct: 0
+},
 {
-q:`21. Преимущество именованных аргументов.`,
-a:["Ускорение","Явность","Память","Конвертация"],c:1},
+q: "21. Разработчик выбирает между позиционными и именованными аргументами для функции с 10 параметрами настроек. Техническое условие: обеспечить защиту от ошибок при изменении порядка аргументов в будущем. Преимущество использования именованных аргументов при вызове:",
+a: [
+"Ускорение выполнения функции интерпретатором",
+"Явное указание назначения каждого значения",
+"Уменьшение объема занимаемой кодом памяти",
+"Автоматическая конвертация типов данных"
+],
+correct: 1
+},
 {
-q:`22. Почему token[1]='2' ошибка.`,
-a:["Reserved","Индекс","Кавычки","Immutable"],c:3},
+q: "22. Скрипт обновления конфигурации выдает ошибку TypeError при попытке выполнить инструкцию token[1] = '2' для переменной token = 'v1_key'. Техническое условие: изменить версию протокола во втором символе существующей строки. Конфликт: невозможность прямой перезаписи элемента в текущем объекте. Первопричина неудачного выполнения данного кода:",
+a: [
+"Ключ является зарезервированным словом",
+"Индекс превышает допустимую длину строки",
+"Используется неверный тип кавычек в коде",
+"Строки являются неизменяемым типом данных"
+],
+correct: 3
+},
 {
-q:`23. Компактное создание списка.`,
-a:["Generator","List Comprehension","Nested","Map"],c:1},
+q: "23. Компактный синтаксис для создания нового списка на основе преобразования элементов существующей последовательности в одну строку кода.",
+a: [
+"Generator Function",
+"List Comprehension",
+"Nested Function",
+"Map Iteration"
+],
+correct: 1
+},
 {
-q:`24. Архитектура except.`,
-a:["raise","Exception","many try","multiple except"],c:3},
+q: "24. Программа-калькулятор должна обрабатывать ошибки ввода данных и одновременно предотвращать деление на ноль в одном блоке кода. Техническое условие: обеспечить работоспособность после любого из нарушений. Ресурсное ограничение: избегать дублирования кода обработки. Конфликт решений: точность идентификации ошибки vs компактность структуры. Правильная архитектура блоков обработки в данном контексте:",
+a: [
+"Использование raise внутри блока else программы",
+"Один общий блок except Exception для всех случаев",
+"Несколько блоков try под каждое отдельное действие",
+"Последовательные блоки except для каждого типа"
+],
+correct: 3
+},
 {
-q:`25. Применение декоратора.`,
-a:["call logger","@logger","wrap","def logger"],c:1},
+q: "25. В системе безопасности необходимо фиксировать момент начала и окончания работы функции process_data. Техническое условие: использовать синтаксический сахар для оборачивания функции. Ресурсное ограничение: логика логирования должна быть вынесена в отдельный объект logger. Корректный способ применения декоратора:",
+a: [
+"call logger process_data",
+"@logger перед def process_data",
+"process_data = logger.wrap()",
+"def logger(process_data): pass"
+],
+correct: 1
+},
 {
-q:`26. Ошибка int('text').`,
-a:["ZeroDivisionError","IndexError","ValueError","NameError"],c:2},
+q: "26. В банковском приложении пользователь вводит текстовое значение в поле «Возраст», что приводит к аварийной остановке функции int(). Техническое условие: данные передаются в функцию преобразования типов. Ресурсное ограничение: выявить точный тип возникшего исключения. Конфликт решений: необходимость обработки конкретной ошибки vs использование общего Exception. Тип исключения, который будет выброшен в данной ситуации:",
+a: [
+"ZeroDivisionError при делении на число 0",
+"IndexError при выходе за границы списка",
+"ValueError при некорректном значении типа",
+"NameError при поиске переменной в памяти"
+],
+correct: 2
+},
 {
-q:`27. Правильное имя переменной.`,
-a:["2_database_id","database-id-val","database_id_2","global-id-item"],c:2},
+q: "27. Соответствие имени переменной стандартам Python для хранения системного идентификатора в рамках проекта.",
+a: [
+"2_database_id",
+"database-id-val",
+"database_id_2",
+"global-id-item"
+],
+correct: 2
+},
 {
-q:`28. Цикл для ввода пароля.`,
-a:["for","while","if","try"],c:1},
+q: "28. Необходимо создать цикл, который запрашивает ввод пароля до тех пор, пока он НЕ будет соответствовать требованиям безопасности. Техническое условие: количество попыток заранее НЕ определено. Ресурсное ограничение: минимизация вложенности. Оптимальная структура управляющей конструкции:",
+a: [
+"for с использованием range(1000)",
+"while с условием валидности",
+"if-elif с рекурсивным вызовом",
+"try-except с финальным блоком"
+],
+correct: 1
+},
 {
-q:`29. Универсальный logger.`,
-a:["*args","**kwargs","kwargs,name","args,name"],c:1},
+q: "29. Необходимо создать универсальную функцию-логер log_event, которая принимает обязательное имя события и любое количество дополнительных характеристик. Техническое условие: характеристики передаются в формате key=value. Ресурсное ограничение: количество характеристик заранее НЕ определено. Верная структура параметров функции:",
+a: [
+"def log_event(name, *args):",
+"def log_event(name, **kwargs):",
+"def log_event(**kwargs, name):",
+"def log_event(*args, name):"
+],
+correct: 1
+},
 {
-q:`30. Порядок параметров функции.`,
-a:["Сначала дефолт","Обязательные перед дефолтными","Любой","Середина"],c:1}
+q: "30. Обязательный порядок расположения параметров в объявлении функции при использовании значений по умолчанию.",
+a: [
+"Сначала параметры со значениями, затем обязательные",
+"Обязательные параметры всегда стоят ПЕРЕД дефолтными",
+"Параметры могут располагаться в произвольном порядке",
+"Дефолтные значения должны стоять только в середине"
+],
+correct: 1
+}
 ];
 
-const quiz=document.getElementById('quiz');
-questions.forEach((item,index)=>{
-const div=document.createElement('div');
-div.className='question';
-let html=`<h3>${item.q}</h3>`;
-item.a.forEach((ans,i)=>{
-html+=`<label class='answer' id='q${index}_${i}'><input type='radio' name='q${index}' value='${i}'> ${ans}</label>`;
-});
-div.innerHTML=html;quiz.appendChild(div);
+const form = document.getElementById('quizForm');
+
+questions.forEach((item, index) => {
+
+    const div = document.createElement('div');
+    div.className = 'question';
+
+    let html = `<h3>${item.q}</h3>`;
+
+    item.a.forEach((answer, i) => {
+        html += `
+        <label id="q${index}_a${i}">
+            <input type="radio" name="q${index}" value="${i}">
+            ${answer}
+        </label>
+        `;
+    });
+
+    div.innerHTML = html;
+    form.appendChild(div);
 });
 
-let totalTime=30*60;
-const timer=document.getElementById('timer');
-function updateTimer(){
-const m=Math.floor(totalTime/60);
-const s=totalTime%60;
-timer.innerHTML=`Осталось времени: ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-if(totalTime<=0){clearInterval(timerInterval);checkAnswers();}
-totalTime--;}
-updateTimer();
-const timerInterval=setInterval(updateTimer,1000);
+function submitQuiz() {
 
-function checkAnswers(){
-clearInterval(timerInterval);
-let score=0;
-questions.forEach((item,index)=>{
-const selected=document.querySelector(`input[name=q${index}]:checked`);
-item.a.forEach((a,i)=>document.getElementById(`q${index}_${i}`).classList.remove('correct','wrong'));
-if(selected){
-const value=Number(selected.value);
-if(value===item.c){score++;document.getElementById(`q${index}_${value}`).classList.add('correct');}
-else{
-document.getElementById(`q${index}_${value}`).classList.add('wrong');
-document.getElementById(`q${index}_${item.c}`).classList.add('correct');
-}}
-});
-const percent=((score/questions.length)*100).toFixed(1);
-document.getElementById('result').innerHTML=`Правильных ответов: ${score}/${questions.length}<br><br>${percent}%`;
+    let score = 0;
+
+    questions.forEach((item, index) => {
+
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+
+        item.a.forEach((a, i) => {
+            const label = document.getElementById(`q${index}_a${i}`);
+
+            if(i === item.correct) {
+                label.classList.add('correct');
+            }
+
+            if(selected && parseInt(selected.value) === i && i !== item.correct) {
+                label.classList.add('wrong');
+            }
+        });
+
+        if(selected && parseInt(selected.value) === item.correct) {
+            score++;
+        }
+    });
+
+    document.getElementById('result').innerHTML =
+        `Правильных ответов: ${score} из ${questions.length}`;
+
+    window.scrollTo(0, document.body.scrollHeight);
 }
+
+let totalSeconds = 60 * 60;
+
+const timer = setInterval(() => {
+
+    totalSeconds--;
+
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = totalSeconds % 60;
+
+    document.getElementById('timer').innerHTML =
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+    if(totalSeconds <= 0) {
+        clearInterval(timer);
+        submitQuiz();
+        alert("Время вышло!");
+    }
+
+}, 1000);
+
 </script>
+
 </body>
 </html>
-```
-
-# index2.html
-
-Сделай копию первого файла и:
-
-* поменяй заголовок на «Часть 2»
-* замени массив questions на вопросы 31–60
-* таймер также 30 минут
