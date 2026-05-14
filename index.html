@@ -138,18 +138,18 @@ c:3
 },
 
 {
-q:"2. Результат использования круглых скобок в (x**2 for x in range(1000))",
+q:"2. Что создают круглые скобки в (x**2 for x in range(1000))?",
 a:[
-"Создание tuple",
-"Создание списка",
-"Создание callback",
-"Создание generator"
+"Кортеж",
+"Список констант",
+"Callback-функцию",
+"Объект-генератор"
 ],
 c:3
 },
 
 {
-q:"3. Оператор для вычисления недостающих элементов",
+q:"3. Как получить товары, которые нужно закупить?",
 a:[
 "required | available",
 "required & available",
@@ -182,7 +182,7 @@ c:3
 },
 
 {
-q:"6. Режим добавления текста в конец файла",
+q:"6. Режим открытия файла для добавления текста",
 a:[
 "'w'",
 "'a'",
@@ -234,6 +234,556 @@ a:[
 "from math import sqrt"
 ],
 c:3
+},
+
+{
+q:"11. Нормализация email",
+a:[
+"email.strip().lower()",
+"email.clear().lower()",
+"email.replace(' ', '')",
+"email.lower().split()"
+],
+c:0
+},
+
+{
+q:"12. Метод получения позиции курсора",
+a:[
+"seek()",
+"read()",
+"tell()",
+"write()"
+],
+c:2
+},
+
+{
+q:"13. bonus_points внутри функции",
+a:[
+"Глобальная",
+"Локальная",
+"Константа",
+"Внешний ресурс"
+],
+c:1
+},
+
+{
+q:"14. Почему генератор не работает повторно",
+a:[
+"Только одна итерация",
+"Автосброс",
+"Защита записи",
+"Ожидание ОС"
+],
+c:0
+},
+
+{
+q:"15. Рекурсивный шаг факториала",
+a:[
+"return n + factorial(n-1)",
+"return n * factorial(n-1)",
+"return factorial(n) * (n+1)",
+"return n / factorial(n-1)"
+],
+c:1
+},
+
+{
+q:"16. Индекс последнего символа",
+a:[
+"0",
+"1",
+"-1",
+"-N"
+],
+c:2
+},
+
+{
+q:"17. Почему пропускается score = 100",
+a:[
+"Ошибка типа",
+"elif вместо else",
+"Нет знака =",
+"Неверный порядок"
+],
+c:2
+},
+
+{
+q:"18. Причина UnboundLocalError",
+a:[
+"Тип не поддерживает +",
+"Python считает x локальной",
+"Глобальные запрещены",
+"x удалена"
+],
+c:1
+},
+
+{
+q:"19. Генерация ValueError",
+a:[
+"break",
+"pass",
+"return",
+"raise"
+],
+c:3
+},
+
+{
+q:"20. Получение 404 из строки",
+a:[
+"log_string[6:10]",
+"log_string[6:9]",
+"log_string[7:9]",
+"log_string[6:8]"
+],
+c:1
+},
+
+{
+q:"21. Преимущество именованных аргументов",
+a:[
+"Ускорение",
+"Явность назначения",
+"Меньше памяти",
+"Автоконвертация"
+],
+c:1
+},
+
+{
+q:"22. Почему token[1]='2' вызывает ошибку",
+a:[
+"Reserved word",
+"Индекс большой",
+"Неверные кавычки",
+"Строки immutable"
+],
+c:3
+},
+
+{
+q:"23. Компактное создание списка",
+a:[
+"Generator Function",
+"List Comprehension",
+"Nested Function",
+"Map Iteration"
+],
+c:1
+},
+
+{
+q:"24. Правильная архитектура except",
+a:[
+"raise внутри else",
+"except Exception",
+"Несколько try",
+"Последовательные except"
+],
+c:3
+},
+
+{
+q:"25. Применение декоратора",
+a:[
+"call logger",
+"@logger",
+"process_data = logger.wrap()",
+"def logger"
+],
+c:1
+},
+
+{
+q:"26. Ошибка int('text')",
+a:[
+"ZeroDivisionError",
+"IndexError",
+"ValueError",
+"NameError"
+],
+c:2
+},
+
+{
+q:"27. Правильное имя переменной",
+a:[
+"2_database_id",
+"database-id-val",
+"database_id_2",
+"global-id-item"
+],
+c:2
+},
+
+{
+q:"28. Цикл для ввода пароля",
+a:[
+"for",
+"while",
+"if-elif",
+"try-except"
+],
+c:1
+},
+
+{
+q:"29. Универсальный logger",
+a:[
+"def log_event(name, *args)",
+"def log_event(name, **kwargs)",
+"def log_event(**kwargs, name)",
+"def log_event(*args, name)"
+],
+c:1
+},
+
+{
+q:"30. Порядок параметров",
+a:[
+"Сначала дефолтные",
+"Обязательные перед дефолтными",
+"Любой порядок",
+"Только в середине"
+],
+c:1
+},
+
+{
+q:"31. enumerate() начиная с 1",
+a:[
+"enumerate(tasks)",
+"enumerate(tasks, 1)",
+"enumerate(tasks, start=1)",
+"enumerate(tasks[1:])"
+],
+c:2
+},
+
+{
+q:"32. Почему token[1]='2' ошибка",
+a:[
+"Reserved word",
+"Индекс большой",
+"Неверные кавычки",
+"Строки immutable"
+],
+c:3
+},
+
+{
+q:"33. Ключевое слово объявления функции",
+a:[
+"func",
+"define",
+"call",
+"def"
+],
+c:3
+},
+
+{
+q:"34. Type Hinting",
+a:[
+"def get_tax(amount: int) -> float:",
+"def get_tax(amount is int) returns float:",
+"def get_tax(int amount) as float:",
+"def get_tax(amount: float) -> int:"
+],
+c:0
+},
+
+{
+q:"35. Универсальный wrapper",
+a:[
+"wrapper(args, kwargs)",
+"wrapper(list, dict)",
+"wrapper(p, k, step)",
+"wrapper(*args, **kwargs)"
+],
+c:3
+},
+
+{
+q:"36. Установка requests",
+a:[
+"pip start requests",
+"pip install requests",
+"python build requests",
+"get library requests"
+],
+c:1
+},
+
+{
+q:"37. Что делает return",
+a:[
+"Немедленно завершает функцию",
+"Продолжает выполнение",
+"Переход в global",
+"Перезапуск функции"
+],
+c:0
+},
+
+{
+q:"38. Проверка установки Python",
+a:[
+"python -help",
+"python --version",
+"python -info",
+"python -check"
+],
+c:1
+},
+
+{
+q:"39. Очистка списка",
+a:[
+"data = 0",
+"data.remove_all()",
+"del data",
+"data.clear()"
+],
+c:3
+},
+
+{
+q:"40. Компактное создание списка",
+a:[
+"Generator Function",
+"List Comprehension",
+"Nested Function",
+"Map Iteration"
+],
+c:1
+},
+
+{
+q:"41. Архитектура except",
+a:[
+"raise inside else",
+"except Exception",
+"many try",
+"multiple except"
+],
+c:3
+},
+
+{
+q:"42. Применение декоратора",
+a:[
+"call logger",
+"@logger",
+"wrap()",
+"def logger"
+],
+c:1
+},
+
+{
+q:"43. Круглые скобки создают",
+a:[
+"Tuple",
+"Const list",
+"Callback",
+"Generator"
+],
+c:3
+},
+
+{
+q:"44. mkdir без ошибки",
+a:[
+"os.path.abspath()",
+"os.path.exists()",
+"os.rmdir()",
+"os.listdir()"
+],
+c:1
+},
+
+{
+q:"45. Объединение словарей",
+a:[
+"append",
+"extend",
+"update",
+"add"
+],
+c:2
+},
+
+{
+q:"46. Почему нельзя изменить строку",
+a:[
+"Dynamic length",
+"Индексация закрыта",
+"Только срезы",
+"Строки immutable"
+],
+c:3
+},
+
+{
+q:"47. Почему tuple нельзя менять",
+a:[
+"Индексация с 1",
+"Tuple immutable",
+"Global variable",
+"Wrong type"
+],
+c:1
+},
+
+{
+q:"48. Создать значение если ключа нет",
+a:[
+"get",
+"update",
+"setdefault",
+"fromkeys"
+],
+c:2
+},
+
+{
+q:"49. Что быстрее для массовой вставки",
+a:[
+"insert(0)",
+"append() O(1)",
+"insert ускоряет поиск",
+"append экономит память"
+],
+c:1
+},
+
+{
+q:"50. Получить уникальные IP",
+a:[
+"list(ips)",
+"set(ips)",
+"tuple(ips)",
+"dict(ips)"
+],
+c:1
+},
+
+{
+q:"51. Ошибка int('text')",
+a:[
+"ZeroDivisionError",
+"IndexError",
+"ValueError",
+"NameError"
+],
+c:2
+},
+
+{
+q:"52. map() для цен",
+a:[
+"list(map(lambda x: x * 450, prices))",
+"list(filter(lambda x: x * 450, prices))",
+"map(prices * 450)",
+"[map(x * 450) for x in prices]"
+],
+c:0
+},
+
+{
+q:"53. Правильное имя переменной",
+a:[
+"2_database_id",
+"database-id-val",
+"database_id_2",
+"global-id-item"
+],
+c:2
+},
+
+{
+q:"54. Результат print(..., sep='_')",
+a:[
+"API v1 _",
+"APIv1_sys",
+"API_v1",
+"API v1"
+],
+c:2
+},
+
+{
+q:"55. Тип для *args",
+a:[
+"List",
+"Set",
+"Dict",
+"Tuple"
+],
+c:3
+},
+
+{
+q:"56. score = 7",
+a:[
+"1",
+"3",
+"2",
+"Ничего"
+],
+c:2
+},
+
+{
+q:"57. Тернарный оператор",
+a:[
+"color = 'red' if error else 'green'",
+"color = 'green' if error else 'red'",
+"error ? 'red' : 'green'",
+"if error"
+],
+c:0
+},
+
+{
+q:"58. Назначение декоратора",
+a:[
+"Ускорение компиляции",
+"Удаление переменных",
+"Изменение поведения функции",
+"Проверка циклов"
+],
+c:2
+},
+
+{
+q:"59. Свойство списков",
+a:[
+"Упорядоченность",
+"Индексация",
+"Изменяемость",
+"Разные типы"
+],
+c:2
+},
+
+{
+q:"60. Форматирование до 2 знаков",
+a:[
+'f"Balance: {val:2f}"',
+'f"Balance: {val:.2}"',
+'f"Balance: {val:.2f}"',
+'f"Balance: {val:f.2}"'
+],
+c:2
 }
 
 ];
@@ -245,7 +795,6 @@ const quiz = document.getElementById("quiz");
 questions.forEach((item,index)=>{
 
     const div = document.createElement("div");
-
     div.className = "question";
 
     let html = `<h3>${item.q}</h3>`;
@@ -262,7 +811,6 @@ questions.forEach((item,index)=>{
     });
 
     div.innerHTML = html;
-
     quiz.appendChild(div);
 
 });
