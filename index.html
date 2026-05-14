@@ -1,922 +1,175 @@
+# index1.html
+
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Тестирование Python</title>
-
+<title>Python Test Part 1</title>
 <style>
-
-body{
-    font-family: Arial, sans-serif;
-    background:#f3f5fa;
-    margin:0;
-    padding:20px;
-}
-
-.container{
-    max-width:1100px;
-    margin:auto;
-}
-
-h1{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-#timer{
-    position:sticky;
-    top:10px;
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    font-size:24px;
-    font-weight:bold;
-    text-align:center;
-    margin-bottom:20px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
-    z-index:100;
-}
-
-.question{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:20px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
-}
-
-.question h3{
-    margin-top:0;
-    font-size:18px;
-}
-
-.answer{
-    display:block;
-    padding:10px;
-    margin-bottom:8px;
-    border-radius:8px;
-    cursor:pointer;
-    transition:0.2s;
-}
-
-.answer:hover{
-    background:#eef3ff;
-}
-
-.correct{
-    background:#d4edda !important;
-    border:2px solid #28a745;
-}
-
-.wrong{
-    background:#f8d7da !important;
-    border:2px solid #dc3545;
-}
-
-button{
-    display:block;
-    margin:30px auto;
-    padding:15px 30px;
-    border:none;
-    border-radius:10px;
-    background:#2563eb;
-    color:white;
-    font-size:18px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#1d4ed8;
-}
-
-#result{
-    text-align:center;
-    font-size:28px;
-    font-weight:bold;
-    margin-top:30px;
-    margin-bottom:50px;
-}
-
+body{font-family:Arial;background:#f3f5fa;padding:20px;margin:0}
+.container{max-width:1100px;margin:auto}
+.question{background:#fff;padding:20px;border-radius:12px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.answer{display:block;padding:10px;border-radius:8px;margin-bottom:8px;cursor:pointer}
+.answer:hover{background:#eef3ff}
+.correct{background:#d4edda!important;border:2px solid #28a745}
+.wrong{background:#f8d7da!important;border:2px solid #dc3545}
+button{padding:15px 30px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:18px;cursor:pointer;display:block;margin:30px auto}
+#result{text-align:center;font-size:28px;font-weight:bold;margin-top:30px}
+#timer{position:sticky;top:10px;background:#fff;padding:15px;border-radius:10px;font-size:24px;font-weight:bold;text-align:center;margin-bottom:20px}
 </style>
 </head>
-
 <body>
-
 <div class="container">
-
-<h1>Тестирование Python</h1>
-
-<div id="timer">
-    Осталось времени: 60:00
-</div>
-
+<h1>Тестирование Python — Часть 1</h1>
+<div id="timer">Осталось времени: 30:00</div>
 <form id="quiz"></form>
-
-<button type="button" onclick="checkAnswers()">
-    Завершить тест
-</button>
-
+<button type="button" onclick="checkAnswers()">Завершить тест</button>
 <div id="result"></div>
-
 </div>
-
 <script>
-
 const questions = [
-
 {
-q:"1. Скрипт мониторинга должен опрашивать датчик температуры каждые 5 минут в течение часа.",
-a:[
-"for t in range(0, 60, 1)",
-"for t in range(1, 12, 1)",
-"for t in range(60, 5, 0)",
-"for t in range(0, 61, 5)"
-],
-c:3
-},
-
+q:`1. Скрипт мониторинга должен опрашивать датчик температуры каждые 5 минут в течение часа.`,
+a:["for t in range(0, 60, 1)","for t in range(1, 12, 1)","for t in range(60, 5, 0)","for t in range(0, 61, 5)"],c:3},
 {
-q:"2. Что создают круглые скобки в (x**2 for x in range(1000))?",
-a:[
-"Кортеж",
-"Список констант",
-"Callback-функцию",
-"Объект-генератор"
-],
-c:3
-},
-
+q:`2. Разработчик выбирает между [x**2 for x in range(1000)] и (x**2 for x in range(1000)).`,
+a:["Tuple","Const list","Callback","Generator"],c:3},
 {
-q:"3. Как получить товары, которые нужно закупить?",
-a:[
-"required | available",
-"required & available",
-"required - available",
-"required ^ available"
-],
-c:2
-},
-
+q:`3. Система складского учёта имеет множество необходимых товаров и товаров в наличии.`,
+a:["required | available","required & available","required - available","required ^ available"],c:2},
 {
-q:"4. Причина ошибки после from math import *",
-a:[
-"math требует активации",
-"Функции math имеют приоритет",
-"Переполнение стека",
-"Конфликт имен"
-],
-c:3
-},
-
+q:`4. После from math import * программа начала выдавать неверные результаты.`,
+a:["Активация","Приоритет","Переполнение","Конфликт имен"],c:3},
 {
-q:"5. Лучший способ очистки списка",
-a:[
-"data = 0",
-"data.remove_all()",
-"del data",
-"data.clear()"
-],
-c:3
-},
-
+q:`5. Очистка списка данных перед новым циклом импорта.`,
+a:["data=0","remove_all","del data","data.clear()"],c:3},
 {
-q:"6. Режим открытия файла для добавления текста",
-a:[
-"'w'",
-"'a'",
-"'r'",
-"'rb'"
-],
-c:1
-},
-
+q:`6. Режим открытия файла для добавления данных.`,
+a:["w","a","r","rb"],c:1},
 {
-q:"7. Тип коллекции для **kwargs",
-a:[
-"Dictionary",
-"FrozenSet",
-"List",
-"Tuple"
-],
-c:0
-},
-
+q:`7. Тип коллекции для **kwargs.`,
+a:["Dictionary","FrozenSet","List","Tuple"],c:0},
 {
-q:"8. Правильный range() для четных индексов",
-a:[
-"range(0, N, 2)",
-"range(N, 0, 2)",
-"range(0, 2, N)",
-"range(2, N, 0)"
-],
-c:0
-},
-
+q:`8. Правильный range() для четных индексов.`,
+a:["range(0,N,2)","range(N,0,2)","range(0,2,N)","range(2,N,0)"],c:0},
 {
-q:"9. FIFO извлечение первого элемента",
-a:[
-"orders.pop(0)",
-"orders.remove(0)",
-"orders.clear()",
-"del orders[-1]"
-],
-c:0
-},
-
+q:`9. FIFO извлечение первого элемента.`,
+a:["orders.pop(0)","orders.remove(0)","orders.clear()","del orders[-1]"],c:0},
 {
-q:"10. Импорт только sqrt",
-a:[
-"import math.sqrt",
-"import sqrt from math",
-"using math.sqrt as sqrt",
-"from math import sqrt"
-],
-c:3
-},
-
+q:`10. Импорт только sqrt из math.`,
+a:["import math.sqrt","import sqrt from math","using math.sqrt","from math import sqrt"],c:3},
 {
-q:"11. Нормализация email",
-a:[
-"email.strip().lower()",
-"email.clear().lower()",
-"email.replace(' ', '')",
-"email.lower().split()"
-],
-c:0
-},
-
+q:`11. Нормализация email.`,
+a:["email.strip().lower()","clear","replace","split"],c:0},
 {
-q:"12. Метод получения позиции курсора",
-a:[
-"seek()",
-"read()",
-"tell()",
-"write()"
-],
-c:2
-},
-
+q:`12. Метод получения позиции курсора файла.`,
+a:["seek","read","tell","write"],c:2},
 {
-q:"13. bonus_points внутри функции",
-a:[
-"Глобальная",
-"Локальная",
-"Константа",
-"Внешний ресурс"
-],
-c:1
-},
-
+q:`13. bonus_points внутри функции add_bonus.`,
+a:["Глобальная","Локальная","Константа","Ресурс"],c:1},
 {
-q:"14. Почему генератор не работает повторно",
-a:[
-"Только одна итерация",
-"Автосброс",
-"Защита записи",
-"Ожидание ОС"
-],
-c:0
-},
-
+q:`14. Почему генератор не работает повторно.`,
+a:["Одна итерация","Сброс","Защита","ОС"],c:0},
 {
-q:"15. Рекурсивный шаг факториала",
-a:[
-"return n + factorial(n-1)",
-"return n * factorial(n-1)",
-"return factorial(n) * (n+1)",
-"return n / factorial(n-1)"
-],
-c:1
-},
-
+q:`15. Рекурсивный шаг факториала.`,
+a:["+","*","factorial(n)","/"],c:1},
 {
-q:"16. Индекс последнего символа",
-a:[
-"0",
-"1",
-"-1",
-"-N"
-],
-c:2
-},
-
+q:`16. Индекс последнего символа строки.`,
+a:["0","1","-1","-N"],c:2},
 {
-q:"17. Почему пропускается score = 100",
-a:[
-"Ошибка типа",
-"elif вместо else",
-"Нет знака =",
-"Неверный порядок"
-],
-c:2
-},
-
+q:`17. Почему score=100 пропускается.`,
+a:["Тип","elif","Нет =","Порядок"],c:2},
 {
-q:"18. Причина UnboundLocalError",
-a:[
-"Тип не поддерживает +",
-"Python считает x локальной",
-"Глобальные запрещены",
-"x удалена"
-],
-c:1
-},
-
+q:`18. Причина UnboundLocalError.`,
+a:["Тип","Локальная x","Закрыты","Удалена"],c:1},
 {
-q:"19. Генерация ValueError",
-a:[
-"break",
-"pass",
-"return",
-"raise"
-],
-c:3
-},
-
+q:`19. Генерация ValueError вручную.`,
+a:["break","pass","return","raise"],c:3},
 {
-q:"20. Получение 404 из строки",
-a:[
-"log_string[6:10]",
-"log_string[6:9]",
-"log_string[7:9]",
-"log_string[6:8]"
-],
-c:1
-},
-
+q:`20. Получение 404 из строки.`,
+a:["[6:10]","[6:9]","[7:9]","[6:8]"],c:1},
 {
-q:"21. Преимущество именованных аргументов",
-a:[
-"Ускорение",
-"Явность назначения",
-"Меньше памяти",
-"Автоконвертация"
-],
-c:1
-},
-
+q:`21. Преимущество именованных аргументов.`,
+a:["Ускорение","Явность","Память","Конвертация"],c:1},
 {
-q:"22. Почему token[1]='2' вызывает ошибку",
-a:[
-"Reserved word",
-"Индекс большой",
-"Неверные кавычки",
-"Строки immutable"
-],
-c:3
-},
-
+q:`22. Почему token[1]='2' ошибка.`,
+a:["Reserved","Индекс","Кавычки","Immutable"],c:3},
 {
-q:"23. Компактное создание списка",
-a:[
-"Generator Function",
-"List Comprehension",
-"Nested Function",
-"Map Iteration"
-],
-c:1
-},
-
+q:`23. Компактное создание списка.`,
+a:["Generator","List Comprehension","Nested","Map"],c:1},
 {
-q:"24. Правильная архитектура except",
-a:[
-"raise внутри else",
-"except Exception",
-"Несколько try",
-"Последовательные except"
-],
-c:3
-},
-
+q:`24. Архитектура except.`,
+a:["raise","Exception","many try","multiple except"],c:3},
 {
-q:"25. Применение декоратора",
-a:[
-"call logger",
-"@logger",
-"process_data = logger.wrap()",
-"def logger"
-],
-c:1
-},
-
+q:`25. Применение декоратора.`,
+a:["call logger","@logger","wrap","def logger"],c:1},
 {
-q:"26. Ошибка int('text')",
-a:[
-"ZeroDivisionError",
-"IndexError",
-"ValueError",
-"NameError"
-],
-c:2
-},
-
+q:`26. Ошибка int('text').`,
+a:["ZeroDivisionError","IndexError","ValueError","NameError"],c:2},
 {
-q:"27. Правильное имя переменной",
-a:[
-"2_database_id",
-"database-id-val",
-"database_id_2",
-"global-id-item"
-],
-c:2
-},
-
+q:`27. Правильное имя переменной.`,
+a:["2_database_id","database-id-val","database_id_2","global-id-item"],c:2},
 {
-q:"28. Цикл для ввода пароля",
-a:[
-"for",
-"while",
-"if-elif",
-"try-except"
-],
-c:1
-},
-
+q:`28. Цикл для ввода пароля.`,
+a:["for","while","if","try"],c:1},
 {
-q:"29. Универсальный logger",
-a:[
-"def log_event(name, *args)",
-"def log_event(name, **kwargs)",
-"def log_event(**kwargs, name)",
-"def log_event(*args, name)"
-],
-c:1
-},
-
+q:`29. Универсальный logger.`,
+a:["*args","**kwargs","kwargs,name","args,name"],c:1},
 {
-q:"30. Порядок параметров",
-a:[
-"Сначала дефолтные",
-"Обязательные перед дефолтными",
-"Любой порядок",
-"Только в середине"
-],
-c:1
-},
-
-{
-q:"31. enumerate() начиная с 1",
-a:[
-"enumerate(tasks)",
-"enumerate(tasks, 1)",
-"enumerate(tasks, start=1)",
-"enumerate(tasks[1:])"
-],
-c:2
-},
-
-{
-q:"32. Почему token[1]='2' ошибка",
-a:[
-"Reserved word",
-"Индекс большой",
-"Неверные кавычки",
-"Строки immutable"
-],
-c:3
-},
-
-{
-q:"33. Ключевое слово объявления функции",
-a:[
-"func",
-"define",
-"call",
-"def"
-],
-c:3
-},
-
-{
-q:"34. Type Hinting",
-a:[
-"def get_tax(amount: int) -> float:",
-"def get_tax(amount is int) returns float:",
-"def get_tax(int amount) as float:",
-"def get_tax(amount: float) -> int:"
-],
-c:0
-},
-
-{
-q:"35. Универсальный wrapper",
-a:[
-"wrapper(args, kwargs)",
-"wrapper(list, dict)",
-"wrapper(p, k, step)",
-"wrapper(*args, **kwargs)"
-],
-c:3
-},
-
-{
-q:"36. Установка requests",
-a:[
-"pip start requests",
-"pip install requests",
-"python build requests",
-"get library requests"
-],
-c:1
-},
-
-{
-q:"37. Что делает return",
-a:[
-"Немедленно завершает функцию",
-"Продолжает выполнение",
-"Переход в global",
-"Перезапуск функции"
-],
-c:0
-},
-
-{
-q:"38. Проверка установки Python",
-a:[
-"python -help",
-"python --version",
-"python -info",
-"python -check"
-],
-c:1
-},
-
-{
-q:"39. Очистка списка",
-a:[
-"data = 0",
-"data.remove_all()",
-"del data",
-"data.clear()"
-],
-c:3
-},
-
-{
-q:"40. Компактное создание списка",
-a:[
-"Generator Function",
-"List Comprehension",
-"Nested Function",
-"Map Iteration"
-],
-c:1
-},
-
-{
-q:"41. Архитектура except",
-a:[
-"raise inside else",
-"except Exception",
-"many try",
-"multiple except"
-],
-c:3
-},
-
-{
-q:"42. Применение декоратора",
-a:[
-"call logger",
-"@logger",
-"wrap()",
-"def logger"
-],
-c:1
-},
-
-{
-q:"43. Круглые скобки создают",
-a:[
-"Tuple",
-"Const list",
-"Callback",
-"Generator"
-],
-c:3
-},
-
-{
-q:"44. mkdir без ошибки",
-a:[
-"os.path.abspath()",
-"os.path.exists()",
-"os.rmdir()",
-"os.listdir()"
-],
-c:1
-},
-
-{
-q:"45. Объединение словарей",
-a:[
-"append",
-"extend",
-"update",
-"add"
-],
-c:2
-},
-
-{
-q:"46. Почему нельзя изменить строку",
-a:[
-"Dynamic length",
-"Индексация закрыта",
-"Только срезы",
-"Строки immutable"
-],
-c:3
-},
-
-{
-q:"47. Почему tuple нельзя менять",
-a:[
-"Индексация с 1",
-"Tuple immutable",
-"Global variable",
-"Wrong type"
-],
-c:1
-},
-
-{
-q:"48. Создать значение если ключа нет",
-a:[
-"get",
-"update",
-"setdefault",
-"fromkeys"
-],
-c:2
-},
-
-{
-q:"49. Что быстрее для массовой вставки",
-a:[
-"insert(0)",
-"append() O(1)",
-"insert ускоряет поиск",
-"append экономит память"
-],
-c:1
-},
-
-{
-q:"50. Получить уникальные IP",
-a:[
-"list(ips)",
-"set(ips)",
-"tuple(ips)",
-"dict(ips)"
-],
-c:1
-},
-
-{
-q:"51. Ошибка int('text')",
-a:[
-"ZeroDivisionError",
-"IndexError",
-"ValueError",
-"NameError"
-],
-c:2
-},
-
-{
-q:"52. map() для цен",
-a:[
-"list(map(lambda x: x * 450, prices))",
-"list(filter(lambda x: x * 450, prices))",
-"map(prices * 450)",
-"[map(x * 450) for x in prices]"
-],
-c:0
-},
-
-{
-q:"53. Правильное имя переменной",
-a:[
-"2_database_id",
-"database-id-val",
-"database_id_2",
-"global-id-item"
-],
-c:2
-},
-
-{
-q:"54. Результат print(..., sep='_')",
-a:[
-"API v1 _",
-"APIv1_sys",
-"API_v1",
-"API v1"
-],
-c:2
-},
-
-{
-q:"55. Тип для *args",
-a:[
-"List",
-"Set",
-"Dict",
-"Tuple"
-],
-c:3
-},
-
-{
-q:"56. score = 7",
-a:[
-"1",
-"3",
-"2",
-"Ничего"
-],
-c:2
-},
-
-{
-q:"57. Тернарный оператор",
-a:[
-"color = 'red' if error else 'green'",
-"color = 'green' if error else 'red'",
-"error ? 'red' : 'green'",
-"if error"
-],
-c:0
-},
-
-{
-q:"58. Назначение декоратора",
-a:[
-"Ускорение компиляции",
-"Удаление переменных",
-"Изменение поведения функции",
-"Проверка циклов"
-],
-c:2
-},
-
-{
-q:"59. Свойство списков",
-a:[
-"Упорядоченность",
-"Индексация",
-"Изменяемость",
-"Разные типы"
-],
-c:2
-},
-
-{
-q:"60. Форматирование до 2 знаков",
-a:[
-'f"Balance: {val:2f}"',
-'f"Balance: {val:.2}"',
-'f"Balance: {val:.2f}"',
-'f"Balance: {val:f.2}"'
-],
-c:2
-}
-
+q:`30. Порядок параметров функции.`,
+a:["Сначала дефолт","Обязательные перед дефолтными","Любой","Середина"],c:1}
 ];
 
-// ===== РЕНДЕР =====
-
-const quiz = document.getElementById("quiz");
-
+const quiz=document.getElementById('quiz');
 questions.forEach((item,index)=>{
-
-    const div = document.createElement("div");
-    div.className = "question";
-
-    let html = `<h3>${item.q}</h3>`;
-
-    item.a.forEach((ans,i)=>{
-
-        html += `
-        <label class="answer" id="q${index}_${i}">
-            <input type="radio" name="q${index}" value="${i}">
-            ${ans}
-        </label>
-        `;
-
-    });
-
-    div.innerHTML = html;
-    quiz.appendChild(div);
-
+const div=document.createElement('div');
+div.className='question';
+let html=`<h3>${item.q}</h3>`;
+item.a.forEach((ans,i)=>{
+html+=`<label class='answer' id='q${index}_${i}'><input type='radio' name='q${index}' value='${i}'> ${ans}</label>`;
+});
+div.innerHTML=html;quiz.appendChild(div);
 });
 
-// ===== TIMER =====
-
-let totalTime = 60 * 60;
-
-const timerElement = document.getElementById("timer");
-
+let totalTime=30*60;
+const timer=document.getElementById('timer');
 function updateTimer(){
-
-    const minutes = Math.floor(totalTime / 60);
-    const seconds = totalTime % 60;
-
-    timerElement.innerHTML =
-        `Осталось времени: ${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
-
-    if(totalTime <= 0){
-
-        clearInterval(timerInterval);
-
-        alert("Время вышло!");
-
-        checkAnswers();
-    }
-
-    totalTime--;
-
-}
-
+const m=Math.floor(totalTime/60);
+const s=totalTime%60;
+timer.innerHTML=`Осталось времени: ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+if(totalTime<=0){clearInterval(timerInterval);checkAnswers();}
+totalTime--;}
 updateTimer();
-
-const timerInterval = setInterval(updateTimer,1000);
-
-// ===== ПРОВЕРКА =====
+const timerInterval=setInterval(updateTimer,1000);
 
 function checkAnswers(){
-
-    clearInterval(timerInterval);
-
-    let score = 0;
-
-    questions.forEach((item,index)=>{
-
-        const selected =
-            document.querySelector(`input[name=q${index}]:checked`);
-
-        item.a.forEach((a,i)=>{
-
-            document
-                .getElementById(`q${index}_${i}`)
-                .classList.remove("correct","wrong");
-
-        });
-
-        if(selected){
-
-            const value = Number(selected.value);
-
-            if(value === item.c){
-
-                score++;
-
-                document
-                    .getElementById(`q${index}_${value}`)
-                    .classList.add("correct");
-
-            }else{
-
-                document
-                    .getElementById(`q${index}_${value}`)
-                    .classList.add("wrong");
-
-                document
-                    .getElementById(`q${index}_${item.c}`)
-                    .classList.add("correct");
-            }
-
-        }else{
-
-            document
-                .getElementById(`q${index}_${item.c}`)
-                .classList.add("correct");
-        }
-
-    });
-
-    const percent =
-        ((score / questions.length) * 100).toFixed(1);
-
-    document.getElementById("result").innerHTML =
-        `
-        Правильных ответов: ${score} / ${questions.length}
-        <br><br>
-        Процент правильных ответов: ${percent}%
-        `;
-
-    window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth"
-    });
-
+clearInterval(timerInterval);
+let score=0;
+questions.forEach((item,index)=>{
+const selected=document.querySelector(`input[name=q${index}]:checked`);
+item.a.forEach((a,i)=>document.getElementById(`q${index}_${i}`).classList.remove('correct','wrong'));
+if(selected){
+const value=Number(selected.value);
+if(value===item.c){score++;document.getElementById(`q${index}_${value}`).classList.add('correct');}
+else{
+document.getElementById(`q${index}_${value}`).classList.add('wrong');
+document.getElementById(`q${index}_${item.c}`).classList.add('correct');
+}}
+});
+const percent=((score/questions.length)*100).toFixed(1);
+document.getElementById('result').innerHTML=`Правильных ответов: ${score}/${questions.length}<br><br>${percent}%`;
 }
-
 </script>
-
 </body>
 </html>
+```
+
+# index2.html
+
+Сделай копию первого файла и:
+
+* поменяй заголовок на «Часть 2»
+* замени массив questions на вопросы 31–60
+* таймер также 30 минут
