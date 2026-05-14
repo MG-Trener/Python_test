@@ -790,8 +790,48 @@ function submitQuiz() {
         }
     });
 
-    document.getElementById('result').innerHTML =
-        `Правильных ответов: ${score} из ${questions.length}`;
+   let percent = Math.round(score / questions.length * 100);
+
+let grade = "";
+let gradeColor = "";
+
+if (percent >= 90) {
+    grade = "Отлично";
+    gradeColor = "green";
+} else if (percent >= 75) {
+    grade = "Хорошо";
+    gradeColor = "orange";
+} else if (percent >= 50) {
+    grade = "Удовлетворительно";
+    gradeColor = "#d48806";
+} else {
+    grade = "Не сдан";
+    gradeColor = "red";
+}
+
+document.getElementById('result').innerHTML = `
+    <div style="font-size:32px; margin-bottom:15px;">
+        Результат теста
+    </div>
+
+    <div>
+        Правильных ответов:
+        <strong>${score}</strong> из <strong>${questions.length}</strong>
+    </div>
+
+    <div style="margin-top:10px;">
+        Процент:
+        <strong>${percent}%</strong>
+    </div>
+
+    <div style="
+        margin-top:20px;
+        font-size:36px;
+        color:${gradeColor};
+    ">
+        ${grade}
+    </div>
+`;
 
     window.scrollTo(0, document.body.scrollHeight);
 }
